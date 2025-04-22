@@ -6,6 +6,8 @@ import { AuthBodyDto } from './authBodyDto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  // On envoie les credentials
+  // On récupère un JWT token
   @Post('login')
   async getAuth(@Body() authBody: AuthBodyDto) {
     const data = await this.authService.login(authBody);
