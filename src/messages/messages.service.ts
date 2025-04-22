@@ -7,7 +7,7 @@ export class MessagesService {
     console.log('oui');
     return `ret`;
   }
-  getMessage(id: string): string {
+  getMessage(id: number): string {
     console.log('oui');
     return `poulet ${id}`;
   }

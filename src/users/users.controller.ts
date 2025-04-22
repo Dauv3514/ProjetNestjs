@@ -8,6 +8,6 @@ export class UsersController {
 
   @Post()
   createUser(@Body() user: User) {
-    return this.usersService.createUser(user)
+    return this.usersService.createUser(user);
   }
 }

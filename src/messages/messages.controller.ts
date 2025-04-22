@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { MessagesDto } from '../models/messages.models';
 
@@ -13,7 +20,7 @@ export class MessagesController {
   }
 
   @Get(':id')
-  getMessage(@Param('id') id: string) {
+  getMessage(@Param('id', ParseIntPipe) id: number) {
     console.log(typeof id);
     const data = this.messagesService.getMessage(id);
     return data;
