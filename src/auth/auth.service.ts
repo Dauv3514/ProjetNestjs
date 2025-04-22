@@ -26,6 +26,12 @@ export class AuthService {
     console.log('existingUser', existingUser);
     return this.authentificateUser({ userId: existingUser.userId });
   }
+  async getProfile(userName: string) {
+    const user = await this.userService.getUser(userName);
+    if (!user) throw new UnauthorizedException('Utilisateur non trouvé');
+    return { userName: user.userName, userId: user.userId };
+  }
+
   // Fonction pour vérifier un mot de passe avec le hash
   private async isPasswordValid(
     password: string,

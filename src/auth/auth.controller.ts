@@ -1,6 +1,14 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthBodyDto } from './authBodyDto';
+import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -12,5 +20,12 @@ export class AuthController {
   async getAuth(@Body() authBody: AuthBodyDto) {
     const data = await this.authService.login(authBody);
     return data;
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  async getProfile(@Request() req) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    return await this.authService.getProfile(req.user.userName);
   }
 }
